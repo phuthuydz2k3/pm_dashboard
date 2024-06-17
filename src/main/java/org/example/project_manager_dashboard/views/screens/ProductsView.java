@@ -57,6 +57,9 @@ public class ProductsView implements Initializable {
             ProductView controller = loader.getController();
             controller.setOrderItemDetails(media);
 
+            // Set the controller as user data for later retrieval
+            mediaItemPane.setUserData(controller);
+
             mediaTable.getChildren().add(mediaItemPane);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,24 +105,8 @@ public class ProductsView implements Initializable {
     private void showCheckBoxes(boolean visible) {
         for (Node node : mediaTable.getChildren()) {
             if (node instanceof AnchorPane) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setRoot(node);
-                loader.setControllerFactory(param -> {
-                    if (node.getUserData() != null) {
-                        return node.getUserData();
-                    } else {
-                        return new ProductView();
-                    }
-                });
-                try {
-                    loader.load();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                ProductView controller = loader.getController();
-                if (controller != null) {
-                    controller.showCheckBox(visible);
-                }
+                ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
+                productView.showCheckBox(visible);
             }
         }
     }

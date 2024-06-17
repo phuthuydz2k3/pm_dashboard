@@ -33,6 +33,8 @@ public class ProductView implements Initializable {
 
     private Boolean checked;
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         checked = false;
