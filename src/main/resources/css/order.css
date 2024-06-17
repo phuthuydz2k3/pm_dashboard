@@ -1,0 +1,17 @@
+#order {
+    background-color: white;
+    -fx-border-color: #0d0c22;
+    -fx-border-width: 0 0 0.1 0;
+}
+
+#stat {
+    -fx-text-fill: white;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-width: 0px;
+    -fx-background-color: #4681f4;
+    -fx-pref-width: 80px;
+    -fx-padding: 5px 10px;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}

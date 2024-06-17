@@ -1,0 +1,143 @@
+/* style.css */
+
+.button {
+    -fx-background-color: white; /* Set the background color of buttons */
+    -fx-text-fill: #0d0c22; /* Set the text color of buttons */
+    -fx-border-radius: 10px;
+    -fx-border-color: #0d0c22;
+    -fx-background-radius: 10px;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #0d0c22;
+    -fx-text-fill: white;
+}
+
+.button:hover #labelProduct {
+    -fx-text-fill: white
+}
+
+#aims {
+    -fx-font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+#aimss, #aimsss, #aimssss {
+    -fx-font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+#searchBox {
+    -fx-alignment: center;
+    -fx-border-color: #0d0c22;
+    -fx-border-width: 0 0 0.1 0;
+}
+#searchBox .label {
+    -fx-text-alignment: center;
+}
+
+#lop:hover {
+    -fx-cursor: hand;
+}
+
+#searchType {
+    -fx-background-color: white; /* Set the background color of buttons */
+    -fx-text-fill: #0d0c22; /* Set the text color of buttons */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+#mediaItem {
+    -fx-background-color: white;
+    -fx-text-fill: #0d0c22;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 80px;
+    -fx-border-color: white;
+}
+
+.label {
+    -fx-text-fill: #0d0c22; /* Set the text color of labels */
+}
+
+.text-field {
+    -fx-background-color: #ffffff; /* Set the background color of text fields */
+}
+
+.choice-box {
+    -fx-background-color: #ffffff; /* Set the background color of choice boxes */
+}
+
+.scroll-pane {
+    -fx-background-color: #ffffff;
+}
+
+.table-view .column-header, .table-view .cell {
+    -fx-font-size: 15px; /* Set the desired font size */
+}
+
+#achr2 {
+    -fx-background-color: white;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+#delivery_info {
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #0d0c22;
+}
+
+#fullName, #email, #phoneNumber, #address, #shippingGuide, #province, #rushDeliveryTime {
+    -fx-border-radius: 5px;
+    -fx-border-color: #0d0c22;
+    -fx-background-radius: 5px;
+    -fx-background-color: white;
+    -fx-alignment: top-left;
+    -fx-border-width: 0.1;
+    -fx-padding: 0 0 0 5;
+}
+
+#approveBtn {
+    -fx-background-color: #0d0c22; /* Set the background color of buttons */
+    -fx-text-fill: white; /* Set the text color of buttons */
+    -fx-border-radius: 5px;
+    -fx-border-color: #0d0c22;
+    -fx-background-radius: 5px;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#rejectBtn {
+    -fx-background-color: #ED0800; /* Set the background color of buttons */
+    -fx-text-fill: white; /* Set the text color of buttons */
+    -fx-border-radius: 5px;
+    -fx-border-color: #ED0800;
+    -fx-background-radius: 5px;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#approveBtn:hover, #rejectBtn:hover {
+    -fx-cursor: hand;
+}
+
+#tb1Header, #tb2Header {
+    -fx-border-color: #0d0c22;
+    -fx-border-width: 0 0 0.1 0;
+    -fx-background-color: white;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+}
+
+#sp, #ordersContainer, #orderItemsContainer {
+    -fx-background-color: white;
+}
+
+#orderItemsContainer {
+    -fx-border-color: #0d0c22;
+    -fx-border-width: 0 0 0.1 0;
+}
+

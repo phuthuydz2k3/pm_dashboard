@@ -1,0 +1,49 @@
+/* style.css */
+
+
+#btn1, #btn2 {
+    -fx-background-color: white; /* Set the background color of buttons */
+    -fx-text-fill: #0d0c22; /* Set the text color of buttons */
+    -fx-border-width: 0px;
+    -fx-font-size: 20px;
+}
+
+#btn1:hover, #btn2:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #0d0c22;
+    -fx-text-fill: white;
+}
+
+#aims {
+    -fx-font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+#aimss {
+    -fx-font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+#drawerPane {
+    -fx-border-color: #0d0c22;
+    -fx-border-width: 0 0.1 0 0;
+    -fx-pref-width: 200px;
+    -fx-background-color: white;
+}
+
+#toggleBtn {
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-text-fill: #0d0c22;
+    -fx-background-color: white;
+    -fx-padding: 0 0 0 0;
+}
+
+#toggleBtn:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #0d0c22;
+    -fx-text-fill: white;
+}
+

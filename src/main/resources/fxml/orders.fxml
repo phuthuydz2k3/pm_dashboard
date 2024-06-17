@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="papa" prefHeight="840.0" prefWidth="1500.0" stylesheets="@../css/orders.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project_manager_dashboard.views.screens.OrdersView">
+    <AnchorPane fx:id="searchBox" layoutY="14.0" prefHeight="46.0" prefWidth="826.0">
+        <TextField fx:id="mediaSearch" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="73.0" promptText="Media Id" />
+       <ChoiceBox fx:id="amountsType" layoutX="217.0" layoutY="14.0" prefHeight="25.0" prefWidth="105.0" />
+       <Label layoutX="338.0" layoutY="16.0" text="From" textFill="#0d0c22" />
+        <Label layoutX="606.0" layoutY="16.0" text="Status:" textFill="#0d0c22" />
+        <Label layoutX="129.0" layoutY="16.0" text="Amounts Type:" textFill="#0d0c22" />
+       <TextField fx:id="fromAmounts" layoutX="376.0" layoutY="14.0" prefHeight="26.0" prefWidth="73.0" promptText="Amounts" />
+       <Label layoutX="461.0" layoutY="16.0" text="To" textFill="#0d0c22" />
+       <TextField fx:id="toAmounts" layoutX="488.0" layoutY="14.0" prefHeight="26.0" prefWidth="73.0" promptText="Amounts" />
+       <ChoiceBox fx:id="statusType" layoutX="652.0" layoutY="14.0" prefHeight="25.0" prefWidth="105.0" />
+          <ImageView fx:id="searchIcon" fitHeight="28.0" fitWidth="247.0" layoutX="784.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#searchOrders">
+              <image>
+                  <Image url="@../images/icons8-search-30.png" />
+              </image>
+          </ImageView>
+    </AnchorPane>
+    <AnchorPane fx:id="achr2" layoutX="-14.0" layoutY="67.0" prefHeight="774.0" prefWidth="1515.0">
+        <Label fx:id="aimss" layoutX="25.0" layoutY="0.0" text="Orders" textFill="#0d0c22" />
+        <AnchorPane fx:id="tb1Header" layoutX="19.0" layoutY="36.0" prefHeight="46.0" prefWidth="652.0">
+                <Label layoutY="14.0" prefHeight="18.0" prefWidth="58.0" text="Order ID" textFill="#0d0c22">
+                </Label>
+                <Label layoutX="99.0" layoutY="14.0" prefHeight="18.0" prefWidth="113.0" text="Shipping Amounts" textFill="#0d0c22">
+                </Label>
+                <Label layoutX="268.0" layoutY="14.0" prefHeight="18.0" prefWidth="80.0" text="Cart Amounts" textFill="#0d0c22">
+                </Label>
+                <Label layoutX="399.0" layoutY="14.0" prefHeight="18.0" prefWidth="106.0" text="Total Amounts" textFill="#0d0c22">
+                </Label>
+                <Label layoutX="567.0" layoutY="14.0" prefHeight="18.0" prefWidth="47.0" text="Status" textFill="#0d0c22">
+                </Label>
+        </AnchorPane>
+        <ScrollPane fx:id="sp" layoutX="14.0" layoutY="84.0" prefHeight="583.0" prefWidth="662.0">
+            <content>
+                <VBox fx:id="ordersContainer" prefHeight="578.0" prefWidth="660.0" spacing="5.0">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <Label fx:id="aimsss" layoutX="685.0" text="Cart" textFill="#0d0c22" />
+        <AnchorPane fx:id="tb2Header" layoutX="685.0" layoutY="36.0" prefHeight="46.0" prefWidth="787.0">
+            <Label layoutY="14.0" prefHeight="18.0" prefWidth="58.0" text="Media ID" textFill="#0d0c22" />
+            <Label layoutX="99.0" layoutY="14.0" prefHeight="18.0" prefWidth="113.0" text="Name" textFill="#0d0c22" />
+            <Label layoutX="218.0" layoutY="14.0" prefHeight="18.0" prefWidth="80.0" text="Price" textFill="#0d0c22" />
+            <Label layoutX="287.0" layoutY="14.0" prefHeight="18.0" prefWidth="80.0" text="Available" textFill="#0d0c22" />
+            <Label layoutX="394.0" layoutY="14.0" prefHeight="18.0" prefWidth="80.0" text="Category" textFill="#0d0c22" />
+            <Label layoutX="483.0" layoutY="14.0" prefHeight="18.0" prefWidth="80.0" text="Weight" textFill="#0d0c22" />
+            <Label layoutX="577.0" layoutY="14.0" prefHeight="18.0" prefWidth="58.0" text="Quantity" textFill="#0d0c22" />
+            <Label layoutX="660.0" layoutY="14.0" prefHeight="18.0" prefWidth="126.0" text="Support Rush Delivery" textFill="#0d0c22" />
+        </AnchorPane>
+        <ScrollPane fx:id="spp" layoutX="685.0" layoutY="78.0" prefHeight="289.0" prefWidth="803.0">
+            <content>
+                <VBox fx:id="orderItemsContainer" prefHeight="286.0" prefWidth="801.0">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <Label fx:id="aimssss" layoutX="688.0" layoutY="372.0" text="Delivery Info" textFill="#0d0c22" />
+        <AnchorPane fx:id="delivery_info" layoutX="688.0" layoutY="408.0" prefHeight="339.0" prefWidth="796.0">
+            <Label alignment="TOP_CENTER" layoutY="14.0" prefHeight="30.0" prefWidth="139.0" text="Full Name:" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="fullName" alignment="TOP_CENTER" layoutX="33.0" layoutY="43.0" prefHeight="30.0" prefWidth="198.0" text="N/A" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="271.0" layoutY="87.0" prefHeight="30.0" prefWidth="139.0" text="Phone Number:" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="phoneNumber" alignment="TOP_CENTER" layoutX="285.0" layoutY="113.0" prefHeight="30.0" prefWidth="198.0" text="N/A" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="508.0" layoutY="14.0" prefHeight="30.0" prefWidth="139.0" text="Email:" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="email" alignment="TOP_CENTER" layoutX="555.0" layoutY="42.0" prefHeight="30.0" prefWidth="210.0" text="N/A" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="-7.0" layoutY="87.0" prefHeight="30.0" prefWidth="139.0" text="Province:" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="province" alignment="TOP_CENTER" layoutX="33.0" layoutY="115.0" prefHeight="27.0" prefWidth="198.0" text="N/A" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="243.0" layoutY="14.0" prefHeight="30.0" prefWidth="133.0" text="Address:" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="address" alignment="TOP_CENTER" layoutX="285.0" layoutY="44.0" prefHeight="27.0" prefWidth="198.0" text="N/A" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="555.0" layoutY="87.0" prefHeight="30.0" prefWidth="163.0" text="Rush Delivery Time:" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="rushDeliveryTime" alignment="TOP_CENTER" layoutX="555.0" layoutY="113.0" prefHeight="30.0" prefWidth="210.0" text="N/A" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="8.0" layoutY="163.0" prefHeight="30.0" prefWidth="163.0" text="Shipping Guide:" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="shippingGuide" alignment="TOP_CENTER" layoutX="35.0" layoutY="201.0" prefHeight="123.0" prefWidth="732.0" text="N/A" textFill="#2d8eb1" wrapText="true">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+        </AnchorPane>
+        <Button fx:id="approveBtn" layoutX="401.0" layoutY="700.0" onAction="#approve" prefHeight="46.0" prefWidth="125.0" text="Approve">
+            <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <image>
+                            <Image url="@../images/icons8-tick-26.png" />
+                        </image>
+                    </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="rejectBtn" layoutX="549.0" layoutY="700.0" onAction="#reject" prefHeight="46.0" prefWidth="126.0" text="Reject">
+            <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <image>
+                            <Image url="@../images/icons8-x-30.png" />
+                        </image>
+                    </ImageView>
+            </graphic>
+        </Button>
+    </AnchorPane>
+</AnchorPane>
