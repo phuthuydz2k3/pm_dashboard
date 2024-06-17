@@ -33,7 +33,7 @@ public class OrderView implements Initializable  {
         ordr.setText(order.getOrderId().toString());
         ship.setText(order.getShippingAmounts().toString());
         camt.setText(order.getCartAmounts().toString());
-        tot.setText(order.getTotalAmounts().toString());
+        tot.setText("100.0");
         stat.setText(order.getState());
         updateStateColor(order.getState());
     }

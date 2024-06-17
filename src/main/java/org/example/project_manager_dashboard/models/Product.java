@@ -1,7 +1,6 @@
 package org.example.project_manager_dashboard.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -14,41 +13,41 @@ import java.util.Objects;
 @NoArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "media")
+@Table(name = "product")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Media {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "media_id")
+    @Column(name = "product_id")
     private Integer mediaId;
 
     @Column(name = "price")
     private Float price;
 
-    @Column(name = "available")
+    @Column(name = "in_stock")
     private Integer available;
 
-    @Column(name = "name")
+    @Column(name = "title")
     private String name;
 
     @Column(name = "imageURL")
     private String imageURL;
 
-    @Column(name = "category")
+    @Column(name = "type_product")
     private String category;
 
     @Column(name = "weight")
     private Float weight;
 
-    @Column(name = "support_rush_delivery")
+    @Column(name = "ro_supported")
     private Short supportRushDelivery;
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Media media = (Media) obj;
-        return Objects.equals(mediaId, media.mediaId);
+        Product product = (Product) obj;
+        return Objects.equals(mediaId, product.mediaId);
     }
 
     // Implement hashCode method based on mediaId

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @SuperBuilder
 @Entity
 @Table(name = "dvd")
-public class DVD extends Media{
+public class DVD extends Product {
 
     // Other DVD-specific attributes
     @Column(name = "disc_type")
@@ -24,8 +24,8 @@ public class DVD extends Media{
     @Column(name = "studio")
     private String studio;
 
-    @Column(name = "released_date")
-    private String releasedDate;
+//    @Column(name = "released_date")
+//    private String releasedDate;
 
     @Column(name = "subtitle")
     private String subtitle;

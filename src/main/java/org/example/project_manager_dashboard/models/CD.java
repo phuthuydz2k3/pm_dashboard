@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "cd")
-public class CD extends Media {
+public class CD extends Product {
 
     // Other CD-specific attributes
     @Column(name = "artist")

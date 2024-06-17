@@ -28,7 +28,7 @@ public class OrdersController {
     }
 
     public List<OrderItemDTO> getOrderItems(int orderId) {
-        Query query = em.createNativeQuery("CALL GetMediaByOrderId(:orderId)");
+        Query query = em.createNativeQuery("CALL GetOrderItems(:orderId)");
         query.setParameter("orderId", orderId);
 
         List<Object[]> results = query.getResultList();
@@ -37,13 +37,13 @@ public class OrdersController {
         for (Object[] result : results) {
             OrderItemDTO orderItem = new OrderItemDTO();
             orderItem.setMediaId((Integer) result[0]);
-            orderItem.setPrice((Float) result[1]);
+            orderItem.setPrice((Double) result[1]);
             orderItem.setAvailable((Integer) result[2]);
             orderItem.setName((String) result[3]);
             orderItem.setImageURL((String) result[4]);
             orderItem.setCategory((String) result[5]);
-            orderItem.setWeight((Float) result[6]);
-            orderItem.setSupportRushDelivery((short) result[7] == 1);
+            orderItem.setWeight((Double) result[6]);
+            orderItem.setSupportRushDelivery((Boolean) result[7]);
             orderItem.setQuantity((Integer) result[8]);
             orderItems.add(orderItem);
         }

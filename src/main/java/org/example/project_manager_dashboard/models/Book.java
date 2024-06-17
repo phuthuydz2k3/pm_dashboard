@@ -13,7 +13,7 @@ import javax.persistence.*;
 @SuperBuilder
 @Entity
 @Table(name = "book")
-public class Book extends Media {
+public class Book extends Product {
 
     @Column(name = "author")
     private String author;
@@ -27,13 +27,13 @@ public class Book extends Media {
     @Column(name = "publish_date")
     private String publishDate;
 
-    @Column(name = "num_of_pages")
-    private Integer numOfPages;
-
-    @Column(name = "language")
-    private String language;
-
-    @Column(name = "book_category")
-    private String bookCategory;
+//    @Column(name = "num_of_pages")
+//    private Integer numOfPages;
+//
+//    @Column(name = "language")
+//    private String language;
+//
+//    @Column(name = "book_category")
+//    private String bookCategory;
 }
 

@@ -12,12 +12,12 @@ import lombok.Builder;
 public class OrderItemDTO {
 
     private Integer mediaId;
-    private Float price;
+    private Double price;
     private Integer available;
     private String name;
     private String imageURL;
     private String category;
-    private Float weight;
+    private Double weight;
     private Boolean supportRushDelivery;
     private Integer quantity;
 }

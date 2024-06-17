@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.example.project_manager_dashboard.models.Media;
+import org.example.project_manager_dashboard.models.Product;
 
 import java.net.URL;
 import java.util.Objects;
@@ -42,15 +42,15 @@ public class ProductView implements Initializable {
         updateCheckBox();
     }
 
-    public void setOrderItemDetails(Media media) {
-        mediaId.setText(media.getMediaId().toString());
-        name.setText(media.getName());
-        price.setText(media.getPrice().toString());
-        available.setText(media.getAvailable().toString());
-        category.setText(media.getCategory());
-        weight.setText(media.getWeight().toString());
-        supportRushDelivery.setText(media.getSupportRushDelivery() == 1 ? "true" : "false");
-        updateStateColor(media.getSupportRushDelivery() == 1 ? "true" : "false");
+    public void setOrderItemDetails(Product product) {
+        mediaId.setText(product.getMediaId().toString());
+        name.setText(product.getName());
+        price.setText(product.getPrice().toString());
+        available.setText(product.getAvailable().toString());
+        category.setText(product.getCategory());
+        weight.setText(product.getWeight().toString());
+        supportRushDelivery.setText(product.getSupportRushDelivery() == 1 ? "true" : "false");
+        updateStateColor(product.getSupportRushDelivery() == 1 ? "true" : "false");
     }
 
     private void updateStateColor(String state) {
@@ -85,5 +85,13 @@ public class ProductView implements Initializable {
 
     public void showCheckBox(boolean visible) {
         checkBoxButton.setVisible(visible);
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public Integer getMediaId() {
+        return Integer.parseInt(mediaId.getText());
     }
 }

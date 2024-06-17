@@ -222,8 +222,8 @@ public class ProductFormView implements Initializable {
                 return;
             }
 
-            // Create Media object
-            Media media;
+            // Create Product object
+            Product product;
             switch (category) {
                 case "Book":
                     String author = ((TextField) extraFieldsVBox.lookup("#authorTextField")).getText();
@@ -233,7 +233,7 @@ public class ProductFormView implements Initializable {
                     Integer numOfPages = Integer.parseInt(((TextField) extraFieldsVBox.lookup("#numOfPagesTextField")).getText());
                     String language = ((TextField) extraFieldsVBox.lookup("#languageTextField")).getText();
                     String bookCategory = ((TextField) extraFieldsVBox.lookup("#bookCategoryTextField")).getText();
-                    media = Book.builder()
+                    product = Book.builder()
                             .price(price)
                             .available(available)
                             .name(name)
@@ -245,9 +245,9 @@ public class ProductFormView implements Initializable {
                             .coverType(coverType)
                             .publisher(publisher)
                             .publishDate(publishDate)
-                            .numOfPages(numOfPages)
-                            .language(language)
-                            .bookCategory(bookCategory)
+//                            .numOfPages(numOfPages)
+//                            .language(language)
+//                            .bookCategory(bookCategory)
                             .build();
                     break;
                 case "CD":
@@ -255,7 +255,7 @@ public class ProductFormView implements Initializable {
                     String releasedDateCD = ((TextField) extraFieldsVBox.lookup("#releasedDateTextFieldCD")).getText();
                     String recordLabel = ((TextField) extraFieldsVBox.lookup("#recordLabelTextFieldCD")).getText();
                     String musicType = ((TextField) extraFieldsVBox.lookup("#musicTypeTextField")).getText();
-                    media = CD.builder()
+                    product = CD.builder()
                             .price(price)
                             .available(available)
                             .name(name)
@@ -276,7 +276,7 @@ public class ProductFormView implements Initializable {
                     String releasedDateDVD = ((TextField) extraFieldsVBox.lookup("#releasedDateTextField")).getText();
                     String subtitle = ((TextField) extraFieldsVBox.lookup("#subtitleTextField")).getText();
                     String runtime = ((TextField) extraFieldsVBox.lookup("#runtimeTextField")).getText();
-                    media = DVD.builder()
+                    product = DVD.builder()
                             .price(price)
                             .available(available)
                             .name(name)
@@ -287,38 +287,38 @@ public class ProductFormView implements Initializable {
                             .discType(discType)
                             .director(director)
                             .studio(studio)
-                            .releasedDate(releasedDateDVD)
+//                            .releasedDate(releasedDateDVD)
                             .subtitle(subtitle)
                             .runtime(runtime)
                             .build();
                     break;
                 case "LP":
-                    String artistLP = ((TextField) extraFieldsVBox.lookup("#artistTextField")).getText();
-                    String releasedDateLP = ((TextField) extraFieldsVBox.lookup("#releasedDateTextFieldLP")).getText();
-                    String recordLabelLP = ((TextField) extraFieldsVBox.lookup("#recordLabelTextFieldLP")).getText();
-                    String musicTypeLP = ((TextField) extraFieldsVBox.lookup("#musicTypeTextField")).getText();
-                    media = LP.builder()
-                            .price(price)
-                            .available(available)
-                            .name(name)
-                            .imageURL(imageURL)
-                            .category(category)
-                            .weight(weight)
-                            .supportRushDelivery(rushDelivery)
-                            .artist(artistLP)
-                            .releasedDate(releasedDateLP)
-                            .recordLabel(recordLabelLP)
-                            .musicType(musicTypeLP)
-                            .build();
-                    break;
+//                    String artistLP = ((TextField) extraFieldsVBox.lookup("#artistTextField")).getText();
+//                    String releasedDateLP = ((TextField) extraFieldsVBox.lookup("#releasedDateTextFieldLP")).getText();
+//                    String recordLabelLP = ((TextField) extraFieldsVBox.lookup("#recordLabelTextFieldLP")).getText();
+//                    String musicTypeLP = ((TextField) extraFieldsVBox.lookup("#musicTypeTextField")).getText();
+//                    product = LP.builder()
+//                            .price(price)
+//                            .available(available)
+//                            .name(name)
+//                            .imageURL(imageURL)
+//                            .category(category)
+//                            .weight(weight)
+//                            .supportRushDelivery(rushDelivery)
+//                            .artist(artistLP)
+//                            .releasedDate(releasedDateLP)
+//                            .recordLabel(recordLabelLP)
+//                            .musicType(musicTypeLP)
+//                            .build();
+//                    break;
                 default:
                     showAlert("Validation Error", "Invalid category selected.");
                     return;
             }
 
 
-            // Save media using ProductsView
-            Boolean result = productsController.addMedia(media);
+            // Save product using ProductsView
+            Boolean result = productsController.addMedia(product);
             showResultAddMedia(result);
 
             // Close the form
@@ -335,7 +335,7 @@ public class ProductFormView implements Initializable {
 
     private void showResultAddMedia(Boolean result) {
         if (result) {
-            showAlert("Success", "Media added successfully.");
+            showAlert("Success", "Product added successfully.");
             if (onMediaAddedCallback != null) {
                 onMediaAddedCallback.run();
             }

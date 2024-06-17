@@ -188,8 +188,8 @@ public class OrdersView implements Initializable {
             address.setText(deliveryInfo.getAddress());
             shippingGuide.setText(deliveryInfo.getInstruction());
             // Convert short value to boolean for rush delivery
-            boolean isRushDelivery = deliveryInfo.getIsRush() != null && deliveryInfo.getIsRush() == 1;
-            rushDeliveryTime.setText(isRushDelivery ? "Rush Delivery" : "Standard Delivery");
+//            boolean isRushDelivery = deliveryInfo.getIsRush() != null && deliveryInfo.getIsRush() == 1;
+//            rushDeliveryTime.setText(isRushDelivery ? "Rush Delivery" : "Standard Delivery");
         } else {
             // Clear delivery info fields if no delivery info found for the order
             fullName.setText("N/A");

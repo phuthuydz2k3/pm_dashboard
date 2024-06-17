@@ -19,10 +19,10 @@ public class Order {
    @Column(name = "order_id")
    private Integer orderId;
 
-   @Column(name = "shipping_amounts")
+   @Column(name = "shipping_fee")
    private Float shippingAmounts;
 
-   @Column(name = "cart_amounts")
+   @Column(name = "cart_amount")
    private Float cartAmounts;
 
    @Column(name = "total_amounts")
@@ -32,6 +32,6 @@ public class Order {
    private String state;
 
    @OneToOne
-   @JoinColumn(name = "delivery_info_id", referencedColumnName = "delivery_info_id")
+   @JoinColumn(name = "delivery_id", referencedColumnName = "delivery_id")
    private DeliveryInfo deliveryInfo;
 }

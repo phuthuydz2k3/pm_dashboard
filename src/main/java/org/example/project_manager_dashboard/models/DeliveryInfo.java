@@ -17,10 +17,10 @@ public class DeliveryInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "delivery_info_id")
+    @Column(name = "delivery_id")
     private Integer deliveryInfoId;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "receiver_name", length = 50)
     private String name;
 
     @Column(name = "phone_number", length = 45)
@@ -38,6 +38,6 @@ public class DeliveryInfo {
     @Column(name = "email", length = 45)
     private String email;
 
-    @Column(name = "is_rush")
-    private Short isRush;
+//    @Column(name = "is_rush")
+//    private Short isRush;
 }
