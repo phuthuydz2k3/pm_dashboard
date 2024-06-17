@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -25,7 +26,7 @@ public class Book extends Product {
     private String publisher;
 
     @Column(name = "publish_date")
-    private String publishDate;
+    private Date publishDate;
 
 //    @Column(name = "num_of_pages")
 //    private Integer numOfPages;

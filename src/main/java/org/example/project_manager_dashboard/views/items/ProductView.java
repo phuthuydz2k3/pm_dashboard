@@ -70,7 +70,7 @@ public class ProductView implements Initializable {
     }
 
     @FXML
-    private void checkBox() {
+    public void checkBox() {
         checked = !checked;
         updateCheckBox();
     }

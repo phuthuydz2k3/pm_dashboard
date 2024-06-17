@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Date;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class CD extends Product {
     private String artist;
 
     @Column(name = "released_date")
-    private String releasedDate;
+    private Date releasedDate;
 
     @Column(name = "record_lable")
     private String recordLabel;

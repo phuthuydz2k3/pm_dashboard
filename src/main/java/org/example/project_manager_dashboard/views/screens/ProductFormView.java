@@ -16,6 +16,9 @@ import org.example.project_manager_dashboard.models.*;
 
 import java.io.File;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ProductFormView implements Initializable {
@@ -60,13 +63,13 @@ public class ProductFormView implements Initializable {
     private void updateExtraFields(String category) {
         extraFieldsVBox.getChildren().clear();
         switch (category) {
-            case "Book":
+            case "book":
                 addBookFields();
                 break;
-            case "CD":
+            case "cd":
                 addCDFields();
                 break;
-            case "DVD":
+            case "dvd":
                 addDVDFields();
                 break;
             case "LP":
@@ -225,11 +228,20 @@ public class ProductFormView implements Initializable {
             // Create Product object
             Product product;
             switch (category) {
-                case "Book":
+                case "book":
                     String author = ((TextField) extraFieldsVBox.lookup("#authorTextField")).getText();
                     String coverType = ((TextField) extraFieldsVBox.lookup("#coverTypeTextField")).getText();
                     String publisher = ((TextField) extraFieldsVBox.lookup("#publisherTextField")).getText();
-                    String publishDate = ((TextField) extraFieldsVBox.lookup("#publishDateTextField")).getText();
+                    String publishDateStr = ((TextField) extraFieldsVBox.lookup("#publishDateTextField")).getText();
+                    Date publishDate = null;
+                    if (!publishDateStr.isEmpty()) {
+                        try {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format as needed
+                            publishDate = dateFormat.parse(publishDateStr);
+                        } catch (ParseException e) {
+                            e.printStackTrace(); // Handle parsing exception as needed
+                        }
+                    }
                     Integer numOfPages = Integer.parseInt(((TextField) extraFieldsVBox.lookup("#numOfPagesTextField")).getText());
                     String language = ((TextField) extraFieldsVBox.lookup("#languageTextField")).getText();
                     String bookCategory = ((TextField) extraFieldsVBox.lookup("#bookCategoryTextField")).getText();
@@ -250,9 +262,18 @@ public class ProductFormView implements Initializable {
 //                            .bookCategory(bookCategory)
                             .build();
                     break;
-                case "CD":
+                case "cd":
                     String artist = ((TextField) extraFieldsVBox.lookup("#artistTextField")).getText();
-                    String releasedDateCD = ((TextField) extraFieldsVBox.lookup("#releasedDateTextFieldCD")).getText();
+                    String releasedDateCDStr = ((TextField) extraFieldsVBox.lookup("#releasedDateTextFieldCD")).getText();
+                    Date releasedDateCD = null;
+                    if (!releasedDateCDStr.isEmpty()) {
+                        try {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format as needed
+                            releasedDateCD = dateFormat.parse(releasedDateCDStr);
+                        } catch (ParseException e) {
+                            e.printStackTrace(); // Handle parsing exception as needed
+                        }
+                    }
                     String recordLabel = ((TextField) extraFieldsVBox.lookup("#recordLabelTextFieldCD")).getText();
                     String musicType = ((TextField) extraFieldsVBox.lookup("#musicTypeTextField")).getText();
                     product = CD.builder()
@@ -269,11 +290,11 @@ public class ProductFormView implements Initializable {
                             .musicType(musicType)
                             .build();
                     break;
-                case "DVD":
+                case "dvd":
                     String discType = ((TextField) extraFieldsVBox.lookup("#discTypeTextField")).getText();
                     String director = ((TextField) extraFieldsVBox.lookup("#directorTextField")).getText();
                     String studio = ((TextField) extraFieldsVBox.lookup("#studioTextField")).getText();
-                    String releasedDateDVD = ((TextField) extraFieldsVBox.lookup("#releasedDateTextField")).getText();
+//                    String releasedDateDVD = ((TextField) extraFieldsVBox.lookup("#releasedDateTextField")).getText();
                     String subtitle = ((TextField) extraFieldsVBox.lookup("#subtitleTextField")).getText();
                     String runtime = ((TextField) extraFieldsVBox.lookup("#runtimeTextField")).getText();
                     product = DVD.builder()

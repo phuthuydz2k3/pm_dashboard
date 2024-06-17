@@ -8,8 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -20,6 +18,7 @@ import org.example.project_manager_dashboard.controllers.ProductsController;
 import org.example.project_manager_dashboard.models.*;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -33,9 +32,14 @@ public class ProductsView implements Initializable {
     @FXML
     private Button selectForDeletionBtn;
 
-    private Stage productFormStage;
+    @FXML
+    private Button cancelDeletion;
 
-    private boolean deletionMode = false;
+    @FXML
+    private Button confirmDeletion;
+
+
+    private Stage productFormStage;
 
     private final ProductsController productsController = ProductsController.getProductsController();
 
@@ -50,6 +54,9 @@ public class ProductsView implements Initializable {
 
         addMediaBtn.addEventHandler(ActionEvent.ACTION, event -> addMedia());
         selectForDeletionBtn.addEventHandler(ActionEvent.ACTION, event -> selectForDeletion());
+
+        cancelDeletion.setVisible(false);
+        confirmDeletion.setVisible(false);
     }
 
     private void addProduct(Product product) {
@@ -104,6 +111,10 @@ public class ProductsView implements Initializable {
     @FXML
     private void selectForDeletion() {
         showCheckBoxes(true);
+        cancelDeletion.setVisible(true);
+        confirmDeletion.setVisible(true);
+        addMediaBtn.setVisible(false);
+        selectForDeletionBtn.setVisible(false);
     }
 
     private void showCheckBoxes(boolean visible) {
@@ -115,48 +126,45 @@ public class ProductsView implements Initializable {
         }
     }
 
-    private void handleSelectOrDelete() {
-        if (deletionMode) {
-            // Deletion mode is active, perform deletion
-            deleteSelectedMedia();
-        } else {
-            // Enter deletion mode
-            enterDeletionMode();
-        }
-    }
-
-    private void enterDeletionMode() {
-        deletionMode = true;
-        showCheckBoxes(true);
-
-        addMediaBtn.setText("Cancel Delete");
-        addMediaBtn.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/icons8-hand-30.png"))));
-
-        selectForDeletionBtn.setText("Delete");
-    }
-
-    private void exitDeletionMode() {
-        deletionMode = false;
-        showCheckBoxes(false);
-
-        addMediaBtn.setText("Add a Product");
-        addMediaBtn.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/icons8-plus-26.png"))));
-
-        selectForDeletionBtn.setText("Select Product for Deletion");
-    }
-
-    private void deleteSelectedMedia() {
+    @FXML
+    private void cancelDeletion() {
+        cancelDeletion.setVisible(false);
+        confirmDeletion.setVisible(false);
+        addMediaBtn.setVisible(true);
+        selectForDeletionBtn.setVisible(true);
         for (Node node : mediaTable.getChildren()) {
             if (node instanceof AnchorPane) {
                 ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
                 if (productView.isChecked()) {
-                    mediaTable.getChildren().remove(node);
+                    productView.checkBox();
+                }
+            }
+        }
+        showCheckBoxes(false);
+    }
+
+    @FXML
+    private void confirmDeletion() {
+        cancelDeletion.setVisible(false);
+        confirmDeletion.setVisible(false);
+        addMediaBtn.setVisible(true);
+        selectForDeletionBtn.setVisible(true);
+
+        List<Node> nodesToRemove = new ArrayList<>();
+        for (Node node : mediaTable.getChildren()) {
+            if (node instanceof AnchorPane) {
+                ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
+                if (productView.isChecked()) {
+                    nodesToRemove.add(node);
                     productsController.deleteMedia(productView.getMediaId());
                 }
             }
         }
-        exitDeletionMode();
+
+        mediaTable.getChildren().removeAll(nodesToRemove);
+        showCheckBoxes(false);
     }
+
 
     private void refreshProductList() {
         mediaTable.getChildren().clear();

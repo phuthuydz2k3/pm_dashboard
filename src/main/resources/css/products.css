@@ -18,7 +18,7 @@
     -fx-text-fill: white
 }
 
-#addMediaBtn {
+#addMediaBtn, #cancelDeletion {
     -fx-background-color: #0d0c22; /* Set the background color of buttons */
     -fx-text-fill: white; /* Set the text color of buttons */
     -fx-border-radius: 5px;
@@ -28,7 +28,7 @@
     -fx-font-weight: bold;
 }
 
-#selectForDeletionBtn {
+#selectForDeletionBtn, #confirmDeletion {
     -fx-background-color: #ED0800; /* Set the background color of buttons */
     -fx-text-fill: white; /* Set the text color of buttons */
     -fx-border-radius: 5px;
