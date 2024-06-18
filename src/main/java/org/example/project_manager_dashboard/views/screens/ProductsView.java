@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -47,12 +48,12 @@ public class ProductsView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Load data from the database and set it to the table
-        List<Product> productList = productsController.getMediaList();
+        List<Product> productList = productsController.getProductList();
         for (Product product : productList) {
             addProduct(product);
         }
 
-        addMediaBtn.addEventHandler(ActionEvent.ACTION, event -> addMedia());
+        addMediaBtn.addEventHandler(ActionEvent.ACTION, event -> addProduct());
         selectForDeletionBtn.addEventHandler(ActionEvent.ACTION, event -> selectForDeletion());
 
         cancelDeletion.setVisible(false);
@@ -68,6 +69,8 @@ public class ProductsView implements Initializable {
             ProductView controller = loader.getController();
             controller.setOrderItemDetails(product);
 
+            mediaItemPane.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> showProductDetails(product));
+
             // Set the controller as user data for later retrieval
             mediaItemPane.setUserData(controller);
 
@@ -77,8 +80,29 @@ public class ProductsView implements Initializable {
         }
     }
 
+    private void showProductDetails(Product product) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/productDetail.fxml"));
+            Parent root = loader.load();
+            Stage productDetailStage = new Stage();
+            productDetailStage.initModality(Modality.APPLICATION_MODAL);
+            productDetailStage.initStyle(StageStyle.UTILITY);
+            productDetailStage.setTitle("Product Details");
+
+            // Get the controller of the loaded FXML and set the product details
+            ProductDetailView productDetailController = loader.getController();
+            productDetailController.setProduct(product);
+
+            productDetailStage.setScene(new Scene(root));
+            productDetailStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @FXML
-    private void addMedia() {
+    private void addProduct() {
         try {
             if (productFormStage == null || !productFormStage.isShowing()) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/productForm.fxml"));
@@ -156,7 +180,7 @@ public class ProductsView implements Initializable {
                 ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
                 if (productView.isChecked()) {
                     nodesToRemove.add(node);
-                    productsController.deleteMedia(productView.getMediaId());
+                    productsController.deleteProduct(productView.getMediaId());
                 }
             }
         }
@@ -168,7 +192,7 @@ public class ProductsView implements Initializable {
 
     private void refreshProductList() {
         mediaTable.getChildren().clear();
-        List<Product> productList = productsController.getMediaList();
+        List<Product> productList = productsController.getProductList();
         for (Product product : productList) {
             addProduct(product);
         }

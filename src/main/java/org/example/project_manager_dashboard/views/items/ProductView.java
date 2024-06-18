@@ -43,7 +43,7 @@ public class ProductView implements Initializable {
     }
 
     public void setOrderItemDetails(Product product) {
-        mediaId.setText(product.getMediaId().toString());
+        mediaId.setText(product.getProductId().toString());
         name.setText(product.getName());
         price.setText(product.getPrice().toString());
         available.setText(product.getAvailable().toString());

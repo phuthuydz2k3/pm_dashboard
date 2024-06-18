@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="10">
+    <Label text="Author:" textFill="#0d0c22" />
+    <TextField fx:id="bookAuthorField" />
+    <Label text="Type:" textFill="#0d0c22" />
+    <TextField fx:id="bookCoverTypeField" />
+    <Label text="Publisher:" textFill="#0d0c22" />
+    <TextField fx:id="bookPublisherField" />
+    <Label text="PublishDate:" textFill="#0d0c22" />
+    <TextField fx:id="bookPublishDateField" />
+</VBox>

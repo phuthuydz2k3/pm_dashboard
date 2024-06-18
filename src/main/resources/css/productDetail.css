@@ -1,0 +1,23 @@
+#updateProductBtn, #confirmUpdateBtn {
+    -fx-background-color: #0d0c22; /* Set the background color of buttons */
+    -fx-text-fill: white; /* Set the text color of buttons */
+    -fx-border-radius: 5px;
+    -fx-border-color: #0d0c22;
+    -fx-background-radius: 5px;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#deleteProductBtn, #cancelUpdateBtn {
+    -fx-background-color: #ED0800; /* Set the background color of buttons */
+    -fx-text-fill: white; /* Set the text color of buttons */
+    -fx-border-radius: 5px;
+    -fx-border-color: #ED0800;
+    -fx-background-radius: 5px;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#updateProductBtn:hover, #deleteProductBtn:hover {
+    -fx-cursor: hand;
+}

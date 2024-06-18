@@ -13,11 +13,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.project_manager_dashboard.controllers.ProductsController;
 import org.example.project_manager_dashboard.models.*;
+import javafx.scene.control.DatePicker;
+
 
 import java.io.File;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -62,14 +63,15 @@ public class ProductFormView implements Initializable {
 
     private void updateExtraFields(String category) {
         extraFieldsVBox.getChildren().clear();
+        System.out.println(category);
         switch (category) {
-            case "book":
+            case "Book":
                 addBookFields();
                 break;
-            case "cd":
+            case "CD":
                 addCDFields();
                 break;
-            case "dvd":
+            case "DVD":
                 addDVDFields();
                 break;
             case "LP":
@@ -91,9 +93,9 @@ public class ProductFormView implements Initializable {
         publisherTextField.setPromptText("Enter publisher");
         publisherTextField.setId("publisherTextField");
 
-        TextField publishDateTextField = new TextField();
-        publishDateTextField.setPromptText("Enter publish date");
-        publishDateTextField.setId("publishDateTextField");
+        DatePicker publishDatePicker = new DatePicker();
+        publishDatePicker.setPromptText("Enter publish date");
+        publishDatePicker.setId("publishDatePicker");
 
         TextField numOfPagesTextField = new TextField();
         numOfPagesTextField.setPromptText("Enter number of pages");
@@ -111,7 +113,7 @@ public class ProductFormView implements Initializable {
                 new Label("Author"), authorTextField,
                 new Label("Cover Type"), coverTypeTextField,
                 new Label("Publisher"), publisherTextField,
-                new Label("Publish Date"), publishDateTextField,
+                new Label("Publish Date"), publishDatePicker,
                 new Label("Number of Pages"), numOfPagesTextField,
                 new Label("Language"), languageTextField,
                 new Label("Book Category"), bookCategoryTextField
@@ -124,9 +126,9 @@ public class ProductFormView implements Initializable {
         artistTextField.setPromptText("Enter artist");
         artistTextField.setId("artistTextField");
 
-        TextField releasedDateTextField = new TextField();
-        releasedDateTextField.setPromptText("Enter released date");
-        releasedDateTextField.setId("releasedDateTextFieldCD");
+        DatePicker releasedDatePickerCD = new DatePicker();
+        releasedDatePickerCD.setPromptText("Enter released date");
+        releasedDatePickerCD.setId("releasedDatePickerCD");
 
         TextField recordLabelTextField = new TextField();
         recordLabelTextField.setPromptText("Enter record label");
@@ -138,7 +140,7 @@ public class ProductFormView implements Initializable {
 
         extraFieldsVBox.getChildren().addAll(
                 new Label("Artist"), artistTextField,
-                new Label("Released Date"), releasedDateTextField,
+                new Label("Released Date"), releasedDatePickerCD,
                 new Label("Record Label"), recordLabelTextField,
                 new Label("Music Type"), musicTypeTextField
         );
@@ -159,9 +161,9 @@ public class ProductFormView implements Initializable {
         studioTextField.setPromptText("Enter studio");
         studioTextField.setId("studioTextField");
 
-        TextField releasedDateTextField = new TextField();
-        releasedDateTextField.setPromptText("Enter released date");
-        releasedDateTextField.setId("releasedDateTextFieldDVD");
+        DatePicker releasedDatePickerDVD = new DatePicker();
+        releasedDatePickerDVD.setPromptText("Enter released date");
+        releasedDatePickerDVD.setId("releasedDatePickerDVD");
 
         TextField subtitleTextField = new TextField();
         subtitleTextField.setPromptText("Enter subtitle");
@@ -175,7 +177,7 @@ public class ProductFormView implements Initializable {
                 new Label("Disc Type"), discTypeTextField,
                 new Label("Director"), directorTextField,
                 new Label("Studio"), studioTextField,
-                new Label("Released Date"), releasedDateTextField,
+                new Label("Released Date"), releasedDatePickerDVD,
                 new Label("Subtitle"), subtitleTextField,
                 new Label("Runtime"), runtimeTextField
         );
@@ -211,12 +213,12 @@ public class ProductFormView implements Initializable {
     @FXML
     private void saveMedia() {
         try {
-            Float price = Float.parseFloat(priceTextField.getText());
+            Double price = Double.parseDouble(priceTextField.getText());
             Integer available = Integer.parseInt(availableTextField.getText());
             String name = nameTextField.getText();
             String imageURL = imageURLTextField.getText();
-            String category = categoryChoiceBox.getValue();
-            Float weight = Float.parseFloat(weightTextField.getText());
+            String category = categoryChoiceBox.getValue().toLowerCase();
+            Double weight = Double.parseDouble(weightTextField.getText());
             Short rushDelivery = rushDeliveryCheckBox.isSelected() ? (short) 1 : (short) 0;
 
             // Validate inputs
@@ -232,15 +234,10 @@ public class ProductFormView implements Initializable {
                     String author = ((TextField) extraFieldsVBox.lookup("#authorTextField")).getText();
                     String coverType = ((TextField) extraFieldsVBox.lookup("#coverTypeTextField")).getText();
                     String publisher = ((TextField) extraFieldsVBox.lookup("#publisherTextField")).getText();
-                    String publishDateStr = ((TextField) extraFieldsVBox.lookup("#publishDateTextField")).getText();
+                    LocalDate publishDateLocal = ((DatePicker) extraFieldsVBox.lookup("#publishDatePicker")).getValue();
                     Date publishDate = null;
-                    if (!publishDateStr.isEmpty()) {
-                        try {
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format as needed
-                            publishDate = dateFormat.parse(publishDateStr);
-                        } catch (ParseException e) {
-                            e.printStackTrace(); // Handle parsing exception as needed
-                        }
+                    if (publishDateLocal != null) {
+                        publishDate = java.sql.Date.valueOf(publishDateLocal);
                     }
                     Integer numOfPages = Integer.parseInt(((TextField) extraFieldsVBox.lookup("#numOfPagesTextField")).getText());
                     String language = ((TextField) extraFieldsVBox.lookup("#languageTextField")).getText();
@@ -264,15 +261,10 @@ public class ProductFormView implements Initializable {
                     break;
                 case "cd":
                     String artist = ((TextField) extraFieldsVBox.lookup("#artistTextField")).getText();
-                    String releasedDateCDStr = ((TextField) extraFieldsVBox.lookup("#releasedDateTextFieldCD")).getText();
+                    LocalDate releasedDateLocalCD = ((DatePicker) extraFieldsVBox.lookup("#releasedDatePickerCD")).getValue();
                     Date releasedDateCD = null;
-                    if (!releasedDateCDStr.isEmpty()) {
-                        try {
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format as needed
-                            releasedDateCD = dateFormat.parse(releasedDateCDStr);
-                        } catch (ParseException e) {
-                            e.printStackTrace(); // Handle parsing exception as needed
-                        }
+                    if (releasedDateLocalCD != null) {
+                        releasedDateCD = java.sql.Date.valueOf(releasedDateLocalCD);
                     }
                     String recordLabel = ((TextField) extraFieldsVBox.lookup("#recordLabelTextFieldCD")).getText();
                     String musicType = ((TextField) extraFieldsVBox.lookup("#musicTypeTextField")).getText();
@@ -339,7 +331,7 @@ public class ProductFormView implements Initializable {
 
 
             // Save product using ProductsView
-            Boolean result = productsController.addMedia(product);
+            Boolean result = productsController.addProduct(product);
             showResultAddMedia(result);
 
             // Close the form

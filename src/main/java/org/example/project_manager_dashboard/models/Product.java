@@ -19,10 +19,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Integer mediaId;
+    private Integer productId;
 
     @Column(name = "price")
-    private Float price;
+    private Double price;
 
     @Column(name = "in_stock")
     private Integer available;
@@ -37,7 +37,7 @@ public class Product {
     private String category;
 
     @Column(name = "weight")
-    private Float weight;
+    private Double weight;
 
     @Column(name = "ro_supported")
     private Short supportRushDelivery;
@@ -47,12 +47,12 @@ public class Product {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Product product = (Product) obj;
-        return Objects.equals(mediaId, product.mediaId);
+        return Objects.equals(productId, product.productId);
     }
 
     // Implement hashCode method based on mediaId
     @Override
     public int hashCode() {
-        return Objects.hash(mediaId);
+        return Objects.hash(productId);
     }
 }

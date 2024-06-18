@@ -21,7 +21,7 @@ public class ProductsController {
     }
 
     // New method to get all media
-    public List<Product> getMediaList() {
+    public List<Product> getProductList() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Product> query = em.createQuery("SELECT m FROM Product m", Product.class);
         return query.getResultList();
@@ -42,7 +42,7 @@ public class ProductsController {
         }
     }
 
-    public boolean addMedia(Product product) {
+    public boolean addProduct(Product product) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -63,7 +63,7 @@ public class ProductsController {
         }
     }
 
-    public void deleteMedia(Integer mediaId) {
+    public void deleteProduct(Integer mediaId) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {

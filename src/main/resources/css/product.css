@@ -4,6 +4,10 @@
     -fx-border-width: 0 0 0.1 0;
 }
 
+#product:hover {
+    -fx-cursor: hand;
+}
+
 #supportRushDelivery {
     -fx-text-fill: white;
     -fx-border-radius: 20px;

@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="product" prefHeight="53.0" prefWidth="1220.0" stylesheets="@../css/product.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project_manager_dashboard.views.items.ProductView">
+<AnchorPane fx:id="product" prefHeight="45.0" prefWidth="1195.0" stylesheets="@../css/product.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project_manager_dashboard.views.items.ProductView">
     <Label fx:id="mediaId" layoutX="14.0" layoutY="10.0" text="Media Id" />
     <Label fx:id="name" layoutX="108.0" layoutY="10.0" text="Name" />
     <Label fx:id="price" layoutX="333.0" layoutY="10.0" text="Price" />
@@ -12,13 +12,12 @@
     <Label fx:id="category" layoutX="707.0" layoutY="10.0" text="Category" />
     <Label fx:id="weight" layoutX="885.0" layoutY="10.0" text="Weight" />
     <Label fx:id="supportRushDelivery" layoutX="1071.0" layoutY="5.0" text="Rush Delivery" />
-    <Button fx:id="checkBoxButton" layoutX="1200.0" layoutY="5.0" onAction="#checkBox" prefWidth="5.0">
-        <graphic>
+    <Button fx:id="checkBoxButton" layoutX="1169.0" layoutY="4.0" onAction="#checkBox" prefWidth="5.0">
+      <graphic>
             <ImageView fitHeight="20" fitWidth="20">
                 <image>
                     <Image url="@../images/icons8-unchecked-checkbox-50.png" />
                 </image>
             </ImageView>
-        </graphic>
-    </Button>
+      </graphic></Button>
 </AnchorPane>

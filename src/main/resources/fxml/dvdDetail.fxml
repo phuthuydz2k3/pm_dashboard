@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="10">
+    <Label text="Type:" textFill="#0d0c22" />
+    <TextField fx:id="dvdDiscTypeField" />
+    <Label text="Director:" textFill="#0d0c22" />
+    <TextField fx:id="dvdDirectorField" />
+    <Label text="Studio:" textFill="#0d0c22" />
+    <TextField fx:id="dvdStudioField" />
+    <Label text="Subtitle:" textFill="#0d0c22" />
+    <TextField fx:id="dvdSubtitleField" />
+    <Label text="Runtime:" textFill="#0d0c22" />
+    <TextField fx:id="dvdRuntimeField" />
+</VBox>
