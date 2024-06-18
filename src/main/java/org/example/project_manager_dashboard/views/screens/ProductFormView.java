@@ -377,17 +377,6 @@ public class ProductFormView implements Initializable {
     }
 
     @FXML
-    private void  browseImage(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Image File");
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
-        if (selectedFile != null) {
-            String imagePath = selectedFile.toURI().toString();
-            imageURLTextField.setText(imagePath);
-        }
-    }
-
-    @FXML
     private void onDragOver(DragEvent event) {
         if (event.getGestureSource() != imageURLTextField &&
                 event.getDragboard().hasFiles()) {
@@ -408,5 +397,21 @@ public class ProductFormView implements Initializable {
         }
         event.setDropCompleted(success);
         event.consume();
+    }
+
+    @FXML
+    private void saveImage() {
+        String imageURL = imageURLTextField.getText();
+        if (!imageURL.isEmpty()) {
+            try {
+                Image image = new Image(imageURL);
+                imageView.setImage(image);
+            } catch (Exception e) {
+                showAlert("Error", "Failed to load image from URL.");
+                e.printStackTrace();
+            }
+        } else {
+            showAlert("Validation Error", "Please enter an image URL.");
+        }
     }
 }

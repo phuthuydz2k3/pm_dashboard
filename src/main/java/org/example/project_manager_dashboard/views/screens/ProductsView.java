@@ -92,6 +92,7 @@ public class ProductsView implements Initializable {
             // Get the controller of the loaded FXML and set the product details
             ProductDetailView productDetailController = loader.getController();
             productDetailController.setProduct(product);
+            productDetailController.setProductsViewCallback(this);
 
             productDetailStage.setScene(new Scene(root));
             productDetailStage.show();
@@ -190,7 +191,7 @@ public class ProductsView implements Initializable {
     }
 
 
-    private void refreshProductList() {
+    public void refreshProductList() {
         mediaTable.getChildren().clear();
         List<Product> productList = productsController.getProductList();
         for (Product product : productList) {

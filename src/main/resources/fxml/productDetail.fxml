@@ -4,10 +4,14 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="625.0" prefWidth="739.0" stylesheets="@../css/productDetail.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project_manager_dashboard.views.screens.ProductDetailView">
-    <HBox prefHeight="552.0" prefWidth="748.0">
-        <ImageView fx:id="productImageView" fitHeight="200" fitWidth="200" preserveRatio="true" />
-        <VBox prefHeight="491.0" prefWidth="753.0">
+<AnchorPane prefHeight="678.0" prefWidth="748.0" stylesheets="@../css/productDetail.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project_manager_dashboard.views.screens.ProductDetailView">
+    <AnchorPane prefHeight="552.0" prefWidth="748.0">
+        <HBox fx:id="imageBrowse" layoutX="14.0" layoutY="511.0" prefHeight="26.0" prefWidth="153.0">
+            <TextField fx:id="imageURLTextField" prefHeight="26.0" prefWidth="155.0" promptText="Enter image URL" />
+<!--            <Button text="Browse" onAction="#browseAndUpdateImage"/>-->
+        </HBox>
+        <ImageView fx:id="productImageView" fitHeight="481.0" fitWidth="340.0" preserveRatio="true" />
+        <VBox layoutX="348.0" prefHeight="491.0" prefWidth="400.0">
             <Label text="Name:" textFill="#0d0c22" />
             <TextField fx:id="productNameField" editable="false" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
             <Label text="Category:" textFill="#0d0c22" />
@@ -23,9 +27,9 @@
             <!-- Placeholder for specific product details -->
             <AnchorPane fx:id="productSpecificDetailsPane" />
         </VBox>
-    </HBox>
-    <HBox layoutX="261.0" layoutY="559.0" spacing="30">
-        <Button fx:id="updateProductBtn" layoutX="677.0" layoutY="695.0" onAction="#updateProduct" prefHeight="58.0" prefWidth="191.0" text="Update Product">
+    </AnchorPane>
+    <AnchorPane layoutX="212.0" layoutY="600.0" prefHeight="86.0" prefWidth="531.0">
+        <Button fx:id="updateProductBtn" layoutX="14.0" layoutY="14.0" onAction="#updateProduct" prefHeight="58.0" prefWidth="191.0" text="Update Product">
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20">
                     <image>
@@ -34,7 +38,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="deleteProductBtn" layoutX="891.0" layoutY="695.0" onAction="#deleteProduct" prefHeight="58.0" prefWidth="277.0" text="Remove Product">
+        <Button fx:id="deleteProductBtn" layoutX="253.0" layoutY="14.0" onAction="#deleteProduct" prefHeight="58.0" prefWidth="277.0" text="Remove Product">
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20">
                     <image>
@@ -43,7 +47,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="confirmUpdateBtn" layoutX="677.0" layoutY="695.0" onAction="#confirmUpdate" prefHeight="58.0" prefWidth="191.0" text="Confirm Update">
+        <Button fx:id="confirmUpdateBtn" layoutX="14.0" layoutY="14.0" onAction="#confirmUpdate" prefHeight="58.0" prefWidth="191.0" text="Confirm Update">
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20">
                     <image>
@@ -52,7 +56,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="cancelUpdateBtn" layoutX="677.0" layoutY="695.0" onAction="#cancelUpdate" prefHeight="58.0" prefWidth="191.0" text="Cancel Update">
+        <Button fx:id="cancelUpdateBtn" layoutX="296.0" layoutY="14.0" onAction="#cancelUpdate" prefHeight="58.0" prefWidth="191.0" text="Cancel Update">
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20">
                     <image>
@@ -61,5 +65,5 @@
                 </ImageView>
             </graphic>
         </Button>
-    </HBox>
+    </AnchorPane>
 </AnchorPane>

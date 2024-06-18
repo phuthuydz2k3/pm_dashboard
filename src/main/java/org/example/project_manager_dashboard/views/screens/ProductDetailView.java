@@ -8,16 +8,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.example.project_manager_dashboard.controllers.ProductController;
 import org.example.project_manager_dashboard.models.Book;
 import org.example.project_manager_dashboard.models.CD;
 import org.example.project_manager_dashboard.models.DVD;
 import org.example.project_manager_dashboard.models.Product;
+import javafx.scene.control.Alert;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ResourceBundle;
 
 public class ProductDetailView implements Initializable {
@@ -41,6 +47,9 @@ public class ProductDetailView implements Initializable {
     private TextField productRushDeliveryField;
 
     @FXML
+    private TextField imageURLTextField;
+
+    @FXML
     private AnchorPane productSpecificDetailsPane;
 
     @FXML
@@ -49,20 +58,31 @@ public class ProductDetailView implements Initializable {
     @FXML
     private ImageView productImageView;
 
+    @FXML
+    private HBox imageBrowse;
+
     private Product product;
+
+    private ProductsView productsViewCallback;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cancelUpdateBtn.setVisible(false);
         confirmUpdateBtn.setVisible(false);
+        imageBrowse.setVisible(false);
+
         if (product != null) {
             setProductDetails(product);
         }
     }
 
+    public void setProductsViewCallback(ProductsView productsViewCallback) {
+        this.productsViewCallback = productsViewCallback;
+    }
+
+
     public void setProduct(Product product) {
         this.product = product;
-        System.out.println(product.toString());
         if (productNameField != null) {
             setProductDetails(product);
         }
@@ -77,10 +97,9 @@ public class ProductDetailView implements Initializable {
         productRushDeliveryField.setText(product.getSupportRushDelivery() == 1 ? "Yes" : "No");
         // Load and set the image
         String imageURL = product.getImageURL();
-        System.out.println(imageURL);
         if (imageURL != null && !imageURL.isEmpty()) {
             try {
-                Image image = new Image(Objects.requireNonNull(getClass().getResource(imageURL)).toExternalForm());
+                Image image = new Image(imageURL);
                 productImageView.setImage(image);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -101,13 +120,17 @@ public class ProductDetailView implements Initializable {
                 ((TextField) pane.lookup("#bookAuthorField")).setText(book.getAuthor());
                 ((TextField) pane.lookup("#bookCoverTypeField")).setText(book.getCoverType());
                 ((TextField) pane.lookup("#bookPublisherField")).setText(book.getPublisher());
-                ((TextField) pane.lookup("#bookPublishDateField")).setText(book.getPublishDate().toString());
+                // Handle the date formatting conditionally
+                String publishDateString = formatDateString(book.getPublishDate().toString());
+                ((TextField) pane.lookup("#bookPublishDateField")).setText(publishDateString);
             } else if (product instanceof CD) {
                 loader.setLocation(getClass().getResource("/fxml/cdDetail.fxml"));
                 pane = loader.load();
                 CD cd = (CD) product;
                 ((TextField) pane.lookup("#cdArtistField")).setText(cd.getArtist());
-                ((TextField) pane.lookup("#cdReleasedDateField")).setText(cd.getReleasedDate().toString());
+                // Handle the date formatting conditionally
+                String releasedDateString = formatDateString(cd.getReleasedDate().toString());
+                ((TextField) pane.lookup("#cdReleasedDateField")).setText(releasedDateString);
                 ((TextField) pane.lookup("#cdRecordLabelField")).setText(cd.getRecordLabel());
                 ((TextField) pane.lookup("#cdMusicTypeField")).setText(cd.getMusicType());
             } else if (product instanceof DVD) {
@@ -129,13 +152,30 @@ public class ProductDetailView implements Initializable {
         }
     }
 
+    private String formatDateString(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            // Try to parse the string as yyyy-MM-dd
+            LocalDate date = LocalDate.parse(dateString, formatter);
+            return date.toString(); // Already in yyyy-MM-dd format
+        } catch (DateTimeParseException e) {
+            // If it fails, try to parse it as yyyy-MM-dd HH:mm:ss[.S]
+            DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[.S]");
+            LocalDateTime dateTime = LocalDateTime.parse(dateString, formatterWithTime);
+            return dateTime.toLocalDate().toString(); // Convert to yyyy-MM-dd format
+        }
+    }
+
+
     @FXML
     private void updateProduct() {
         if (product != null) {
             updateProductBtn.setVisible(false);
             deleteProductBtn.setVisible(false);
+
             cancelUpdateBtn.setVisible(true);
             confirmUpdateBtn.setVisible(true);
+            imageBrowse.setVisible(true);
 
             makeAllTextFieldsEditable(true);
         }
@@ -163,10 +203,13 @@ public class ProductDetailView implements Initializable {
                 // Optionally, update UI or show success message
                 System.out.println("Product deleted successfully.");
                 // Clear fields or handle UI state as needed after deletion
+                productsViewCallback.refreshProductList();
             } else {
                 // Handle deletion failure
                 System.out.println("Failed to delete product.");
             }
+            Stage stage = (Stage) deleteProductBtn.getScene().getWindow();
+            stage.close();
         }
     }
 
@@ -179,6 +222,13 @@ public class ProductDetailView implements Initializable {
                 product.setName(productNameField.getText());
                 product.setCategory(productCategoryField.getText());
                 product.setPrice(Double.parseDouble(productPriceField.getText()));
+                // Update image URL if it has changed
+                String currentImageURL = imageURLTextField.getText();
+                if (currentImageURL != null && !currentImageURL.isEmpty()) {
+                    // Image has been updated
+                    product.setImageURL(currentImageURL);
+                }
+
                 product.setAvailable(Integer.parseInt(productStockField.getText()));
                 product.setWeight(Double.parseDouble(productWeightField.getText()));
                 product.setSupportRushDelivery((short) (productRushDeliveryField.getText().equalsIgnoreCase("Yes") ? 1 : 0));
@@ -213,16 +263,24 @@ public class ProductDetailView implements Initializable {
                     System.out.println("Failed to update product. Reverting to previous state.");
                 }
             } catch (Exception e) {
-                product = oldProduct;  // Revert to old product details
+                product = oldProduct;
+                System.out.println(e);// Revert to old product details
                 System.out.println("An error occurred while updating the product. Reverting to previous state.");
             }
 
             updateProductBtn.setVisible(true);
             deleteProductBtn.setVisible(true);
+
             cancelUpdateBtn.setVisible(false);
             confirmUpdateBtn.setVisible(false);
+            imageBrowse.setVisible(false);
 
             makeAllTextFieldsEditable(false);
+
+            Stage stage = (Stage) updateProductBtn.getScene().getWindow();
+            stage.close();
+
+            productsViewCallback.refreshProductList();
         }
     }
 
@@ -290,10 +348,20 @@ public class ProductDetailView implements Initializable {
     private void cancelUpdate() {
         updateProductBtn.setVisible(true);
         deleteProductBtn.setVisible(true);
+
         cancelUpdateBtn.setVisible(false);
         confirmUpdateBtn.setVisible(false);
+        imageBrowse.setVisible(false);
 
         makeAllTextFieldsEditable(false);
         loadSpecificDetails(product);
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
