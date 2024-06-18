@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -175,19 +176,42 @@ public class ProductsView implements Initializable {
         addMediaBtn.setVisible(true);
         selectForDeletionBtn.setVisible(true);
 
+        int checked = 0;
         List<Node> nodesToRemove = new ArrayList<>();
         for (Node node : mediaTable.getChildren()) {
             if (node instanceof AnchorPane) {
                 ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
                 if (productView.isChecked()) {
-                    nodesToRemove.add(node);
-                    productsController.deleteProduct(productView.getMediaId());
+                    checked++;
                 }
             }
         }
+        if (checked <= 10) {
+            DailyCounter dailyCounter = productsController.getDailyCounter();
+            int sum = checked + dailyCounter.getCounterValue();
+            if (sum <= 30) {
+                for (Node node : mediaTable.getChildren()) {
+                    if (node instanceof AnchorPane) {
+                        ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
+                        if (productView.isChecked()) {
+                            nodesToRemove.add(node);
+                            productsController.deleteProduct(productView.getMediaId());
+                        }
+                    }
+                }
 
-        mediaTable.getChildren().removeAll(nodesToRemove);
-        showCheckBoxes(false);
+                mediaTable.getChildren().removeAll(nodesToRemove);
+                showCheckBoxes(false);
+
+                showAlert("Success", "Selected products have been deleted successfully.");
+                dailyCounter.setCounterValue(sum);
+                productsController.updateDailyCounter(dailyCounter);
+            } else {
+                showAlert("Failed", "Can not delete more than 30 products a day.");
+            }
+        } else {
+            showAlert("Failed", "Can not delete more than 10 products at a times.");
+        }
     }
 
 
@@ -197,5 +221,13 @@ public class ProductsView implements Initializable {
         for (Product product : productList) {
             addProduct(product);
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

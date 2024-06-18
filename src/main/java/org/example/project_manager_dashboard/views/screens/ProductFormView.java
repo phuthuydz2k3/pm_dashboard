@@ -1,6 +1,5 @@
 package org.example.project_manager_dashboard.views.screens;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.project_manager_dashboard.controllers.ProductsController;
 import org.example.project_manager_dashboard.models.*;

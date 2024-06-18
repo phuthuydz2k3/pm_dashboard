@@ -12,10 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.project_manager_dashboard.controllers.ProductController;
-import org.example.project_manager_dashboard.models.Book;
-import org.example.project_manager_dashboard.models.CD;
-import org.example.project_manager_dashboard.models.DVD;
-import org.example.project_manager_dashboard.models.Product;
+import org.example.project_manager_dashboard.controllers.ProductsController;
+import org.example.project_manager_dashboard.models.*;
 import javafx.scene.control.Alert;
 
 import java.net.URL;
@@ -64,6 +62,8 @@ public class ProductDetailView implements Initializable {
     private Product product;
 
     private ProductsView productsViewCallback;
+
+    private final ProductsController productsController = ProductsController.getProductsController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -198,18 +198,27 @@ public class ProductDetailView implements Initializable {
     @FXML
     private void deleteProduct() {
         if (product != null) {
-            boolean deleted = ProductController.getProductController().deleteProduct(product.getProductId());
-            if (deleted) {
-                // Optionally, update UI or show success message
-                System.out.println("Product deleted successfully.");
-                // Clear fields or handle UI state as needed after deletion
-                productsViewCallback.refreshProductList();
-            } else {
-                // Handle deletion failure
-                System.out.println("Failed to delete product.");
+            DailyCounter dailyCounter = productsController.getDailyCounter();
+            int sum = dailyCounter.getCounterValue() + 1;
+            if (sum <= 30) {
+                boolean deleted = ProductController.getProductController().deleteProduct(product.getProductId());
+                if (deleted) {
+                    productsViewCallback.refreshProductList();
+                    dailyCounter.setCounterValue(sum);
+                    productsController.updateDailyCounter(dailyCounter);
+
+                    // Optionally, update UI or show success message
+                    showAlert("Product deleted successfully.");
+                    // Clear fields or handle UI state as needed after deletion
+                } else {
+                    // Handle deletion failure
+                    showAlert("Failed to delete product.");
+                }
+                Stage stage = (Stage) deleteProductBtn.getScene().getWindow();
+                stage.close();
+            } else  {
+                showAlert("Can not delete more than 30 products a day!");
             }
-            Stage stage = (Stage) deleteProductBtn.getScene().getWindow();
-            stage.close();
         }
     }
 
@@ -257,14 +266,13 @@ public class ProductDetailView implements Initializable {
 
                 boolean updated = ProductController.getProductController().updateProduct(product);
                 if (updated) {
-                    System.out.println("Product updated successfully.");
+                    showAlert("Product updated successfully.");
                 } else {
                     product = oldProduct;  // Revert to old product details
-                    System.out.println("Failed to update product. Reverting to previous state.");
+                    showAlert("Failed to update product. Reverting to previous state.");
                 }
             } catch (Exception e) {
                 product = oldProduct;
-                System.out.println(e);// Revert to old product details
                 System.out.println("An error occurred while updating the product. Reverting to previous state.");
             }
 
@@ -357,9 +365,9 @@ public class ProductDetailView implements Initializable {
         loadSpecificDetails(product);
     }
 
-    private void showAlert(String title, String message) {
+    private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
+        alert.setTitle("Alert");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

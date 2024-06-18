@@ -1,6 +1,7 @@
 package org.example.project_manager_dashboard.controllers;
 
 import org.example.project_manager_dashboard.models.Book;
+import org.example.project_manager_dashboard.models.DailyCounter;
 import org.example.project_manager_dashboard.models.Product;
 
 import javax.persistence.*;
@@ -78,6 +79,46 @@ public class ProductsController {
                 transaction.rollback();
             }
             e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+
+    public DailyCounter getDailyCounter() {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        DailyCounter dailyCounter = null;
+
+        try {
+            transaction.begin();
+            dailyCounter = em.find(DailyCounter.class, 1);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+
+        return dailyCounter;
+    }
+
+    public boolean updateDailyCounter(DailyCounter dailyCounter) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.merge(dailyCounter);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
         } finally {
             em.close();
         }
