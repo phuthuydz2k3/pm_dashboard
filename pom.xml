@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.20</version> <!-- Update to the latest version -->
+            <version>1.18.30</version> <!-- Update to the latest version -->
             <scope>provided</scope>
         </dependency>
         <dependency>
