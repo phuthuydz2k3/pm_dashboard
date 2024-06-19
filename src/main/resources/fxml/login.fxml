@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project_manager_dashboard.views.screens.LoginView">
     <AnchorPane fx:id="login_form" layoutX="400.0" prefHeight="500.0" prefWidth="400.0" styleClass="form" >
-        <TextField layoutX="148.0" layoutY="261.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" style="-fx-background-color: #FFFFFF;">
+        <TextField fx:id="login_password_show" layoutX="148.0" layoutY="261.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" style="-fx-background-color: #FFFFFF;">
             <font>
                 <Font name="Verdana" size="14.0" />
             </font>

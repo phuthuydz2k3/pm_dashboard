@@ -5,9 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -26,7 +29,7 @@ public class MainView implements Initializable {
     private AnchorPane contentArea;
 
     @FXML
-    private Button btn1, btn2, toggleBtn;
+    private Button btn1, btn2, btn3, toggleBtn;
 
     private Boolean menuOpen;
 
@@ -43,6 +46,8 @@ public class MainView implements Initializable {
         btn1.setOnMouseExited(e -> changeButtonImage(btn1, "/images/product_black.png"));
         btn2.setOnMouseEntered(e -> changeButtonImage(btn2, "/images/order_white.png"));
         btn2.setOnMouseExited(e -> changeButtonImage(btn2, "/images/order_black.png"));
+        btn3.setOnMouseEntered(e -> changeButtonImage(btn3, "/images/logout-white.png"));
+        btn3.setOnMouseExited(e -> changeButtonImage(btn3, "/images/logout-black.png"));
 
         toggleBtn.setOnMouseEntered(e -> updateToggleBtnHoverIcon(true));
         toggleBtn.setOnMouseExited(e -> updateToggleBtnHoverIcon(false));
@@ -103,4 +108,28 @@ public class MainView implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void signout() {
+        try {
+            // Load the login screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage and set the new scene
+            Stage stage = (Stage) drawerPane.getScene().getWindow(); // Get the current stage
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            // Optionally, you can clear any session data or perform other cleanup actions here
+
+            // Show the stage
+            stage.setTitle("Project Manager Login"); // Optional: Change the title if needed
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

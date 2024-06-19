@@ -53,5 +53,16 @@
                 </HBox>
             </graphic>
         </Button>
+        <Button fx:id="btn3" layoutY="734.0" onAction="#signout" prefHeight="53.0" prefWidth="237.0" text="Signout">
+            <graphic>
+                <HBox>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@../images/logout-black.png" />
+                        </image>
+                    </ImageView>
+                </HBox>
+            </graphic>
+        </Button>
     </AnchorPane>
 </AnchorPane>

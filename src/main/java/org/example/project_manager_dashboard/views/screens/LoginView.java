@@ -206,45 +206,45 @@ public class LoginView implements Initializable {
 
     @FXML
     void switchRegisterForm() {
-//        slider.requestFocus();
-//        register_form.setVisible(true);
-//        transition = new TranslateTransition();
-//        transition.setNode(slider);
-//        transition.setToX(400);
-//        transition.setDuration(Duration.seconds(.6));
-//        transition.setOnFinished(e -> {
-//            //hide login form
-//            login_username.setText("");
-//            login_password_show.setText("");
-//            login_password_hidden.setText("");
-//            login_errorAlert.setVisible(false);
-//            login_form.setVisible(false);
-//
-//        });
-//        transition.play();
+        slider.requestFocus();
+        register_form.setVisible(true);
+        transition = new TranslateTransition();
+        transition.setNode(slider);
+        transition.setToX(400);
+        transition.setDuration(Duration.seconds(.6));
+        transition.setOnFinished(e -> {
+            //hide login form
+            login_username.setText("");
+            login_password_show.setText("");
+            login_password_hidden.setText("");
+            login_errorAlert.setVisible(false);
+            login_form.setVisible(false);
+
+        });
+        transition.play();
     }
 
     @FXML
     void switchLoginForm() {
-//        slider.requestFocus();
-//        login_form.setVisible(true);
-//        transition = new TranslateTransition();
-//        transition.setNode(slider);
-//        transition.setToX(0);
-//        transition.setDuration(Duration.seconds(.6));
-//        transition.setOnFinished(e -> {
-//            //reset register form and hide.
-//            register_fullname.setText("");
-//            register_username.setText("");
-//            register_password.setText("");
-//            register_confirm.setText("");
-//            register_phoneNumber.setText("");
-////            role0.setSelected(false);
-////            role1.setSelected(false);
-//            register_errorAlert.setVisible(false);
-//            register_form.setVisible(false);
-//        });
-//        transition.play();
+        slider.requestFocus();
+        login_form.setVisible(true);
+        transition = new TranslateTransition();
+        transition.setNode(slider);
+        transition.setToX(0);
+        transition.setDuration(Duration.seconds(.6));
+        transition.setOnFinished(e -> {
+            //reset register form and hide.
+            register_fullname.setText("");
+            register_username.setText("");
+            register_password.setText("");
+            register_confirm.setText("");
+            register_phoneNumber.setText("");
+//            role0.setSelected(false);
+//            role1.setSelected(false);
+            register_errorAlert.setVisible(false);
+            register_form.setVisible(false);
+        });
+        transition.play();
     }
 
     @FXML

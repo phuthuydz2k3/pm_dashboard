@@ -1,14 +1,14 @@
 /* style.css */
 
 
-#btn1, #btn2 {
+#btn1, #btn2, #btn3 {
     -fx-background-color: white; /* Set the background color of buttons */
     -fx-text-fill: #0d0c22; /* Set the text color of buttons */
     -fx-border-width: 0px;
     -fx-font-size: 20px;
 }
 
-#btn1:hover, #btn2:hover {
+#btn1:hover, #btn2:hover, #btn3:hover {
     -fx-cursor: hand;
     -fx-background-color: #0d0c22;
     -fx-text-fill: white;

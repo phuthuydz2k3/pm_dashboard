@@ -236,6 +236,7 @@ public class OrdersView implements Initializable {
                     selectedOrder.setState("Approved");
                     OrdersController.getHomeController().updateOrderState(selectedOrder);
                     updateButtonVisibility(null);
+                    refreshOrderList();
                 }
             });
         }
