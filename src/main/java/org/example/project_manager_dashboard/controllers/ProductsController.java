@@ -3,6 +3,7 @@ package org.example.project_manager_dashboard.controllers;
 import org.example.project_manager_dashboard.models.Book;
 import org.example.project_manager_dashboard.models.DailyCounter;
 import org.example.project_manager_dashboard.models.Product;
+import org.example.project_manager_dashboard.models.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -88,10 +89,19 @@ public class ProductsController {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         DailyCounter dailyCounter = null;
+        int userId = LoginController.loggedInUserId;
 
         try {
             transaction.begin();
-            dailyCounter = em.find(DailyCounter.class, 1);
+
+            // Retrieve the User entity first
+            User user = em.find(User.class, userId);
+
+            if (user != null) {
+                // Get the associated DailyCounter
+                dailyCounter = user.getDailyCounter();
+            }
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction.isActive()) {
