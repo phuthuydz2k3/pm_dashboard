@@ -36,5 +36,22 @@ public class Book extends Product {
 //
 //    @Column(name = "book_category")
 //    private String bookCategory;
+
+    @Override
+    public Product createCopy() {
+        return Book.builder()
+                .productId(this.productId)
+                .name(this.name)
+                .category(this.category)
+                .price(this.price)
+                .available(this.available)
+                .weight(this.weight)
+                .supportRushDelivery(this.supportRushDelivery)
+                .author(this.author)
+                .coverType(this.coverType)
+                .publisher(this.publisher)
+                .publishDate(this.publishDate)
+                .build();
+    }
 }
 

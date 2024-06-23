@@ -24,6 +24,7 @@
             <TextField fx:id="productWeightField" editable="false" />
             <Label text="Rush Delivery:" textFill="#0d0c22" />
             <TextField fx:id="productRushDeliveryField" editable="false" />
+            <CheckBox fx:id="rushDeliveryCheckBox"/>
             <!-- Placeholder for specific product details -->
             <AnchorPane fx:id="productSpecificDetailsPane" />
         </VBox>

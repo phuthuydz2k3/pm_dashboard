@@ -33,13 +33,15 @@ public class OrderView implements Initializable  {
         ordr.setText(order.getOrderId().toString());
         ship.setText(order.getShippingAmounts().toString());
         camt.setText(order.getCartAmounts().toString());
-        tot.setText("100.0");
+        Double t = order.getShippingAmounts() + order.getCartAmounts();
+        tot.setText(t.toString());
         stat.setText(order.getState());
         updateStateColor(order.getState());
     }
 
     private void updateStateColor(String state) {
         String color;
+
         switch (state) {
             case "Pending":
                 color = "#ffbd03";

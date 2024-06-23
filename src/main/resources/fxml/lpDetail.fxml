@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="10">
+    <Label text="Artist:" textFill="#0d0c22" />
+    <TextField fx:id="lpArtistField" />
+    <Label text="ReleaseDate:" textFill="#0d0c22" />
+    <TextField fx:id="lpReleasedDateField" />
+    <Label text="RecordLabel:" textFill="#0d0c22" />
+    <TextField fx:id="lpRecordLabelField" />
+    <Label text="MusicType:" textFill="#0d0c22" />
+    <TextField fx:id="lpMusicTypeField" />
+</VBox>

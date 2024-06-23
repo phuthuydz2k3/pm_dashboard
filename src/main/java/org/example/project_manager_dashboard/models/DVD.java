@@ -32,5 +32,23 @@ public class DVD extends Product {
 
     @Column(name = "runtime")
     private String runtime;
+
+    @Override
+    public Product createCopy() {
+        return DVD.builder()
+                .productId(this.getProductId())
+                .name(this.getName())
+                .category(this.getCategory())
+                .price(this.getPrice())
+                .available(this.getAvailable())
+                .weight(this.getWeight())
+                .supportRushDelivery(this.getSupportRushDelivery())
+                .discType(this.getDiscType())
+                .director(this.getDirector())
+                .studio(this.getStudio())
+                .subtitle(this.getSubtitle())
+                .runtime(this.getRuntime())
+                .build();
+    }
 }
 

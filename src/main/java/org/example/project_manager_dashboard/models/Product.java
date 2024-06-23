@@ -15,32 +15,32 @@ import java.util.Objects;
 @Entity
 @Table(name = "product")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Product {
+public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Integer productId;
+    protected Integer productId;
 
     @Column(name = "price")
-    private Double price;
+    protected Double price;
 
     @Column(name = "in_stock")
-    private Integer available;
+    protected Integer available;
 
     @Column(name = "title")
-    private String name;
+    protected String name;
 
     @Column(name = "imageURL")
-    private String imageURL;
+    protected String imageURL;
 
     @Column(name = "type_product")
-    private String category;
+    protected String category;
 
     @Column(name = "weight")
-    private Double weight;
+    protected Double weight;
 
     @Column(name = "ro_supported")
-    private Short supportRushDelivery;
+    protected Short supportRushDelivery;
 
     @Override
     public boolean equals(Object obj) {
@@ -55,4 +55,6 @@ public class Product {
     public int hashCode() {
         return Objects.hash(productId);
     }
+
+    public abstract Product createCopy();
 }

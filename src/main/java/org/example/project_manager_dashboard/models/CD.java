@@ -28,4 +28,21 @@ public class CD extends Product {
 
     @Column(name = "music_type")
     private String musicType;
+
+    @Override
+    public Product createCopy() {
+        return CD.builder()
+                .productId(this.getProductId())
+                .name(this.getName())
+                .category(this.getCategory())
+                .price(this.getPrice())
+                .available(this.getAvailable())
+                .weight(this.getWeight())
+                .supportRushDelivery(this.getSupportRushDelivery())
+                .artist(this.getArtist())
+                .releasedDate(this.getReleasedDate())
+                .recordLabel(this.getRecordLabel())
+                .musicType(this.getMusicType())
+                .build();
+    }
 }

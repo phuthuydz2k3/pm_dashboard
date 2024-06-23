@@ -29,6 +29,4 @@ public class DailyCounter {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid") // This should match the @Id column name in User entity
     private User user;
-
-
 }

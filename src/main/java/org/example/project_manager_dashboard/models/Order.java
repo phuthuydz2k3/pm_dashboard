@@ -20,13 +20,13 @@ public class Order {
    private Integer orderId;
 
    @Column(name = "shipping_fee")
-   private Float shippingAmounts;
+   private Double shippingAmounts;
 
    @Column(name = "cart_amount")
-   private Float cartAmounts;
+   private Double cartAmounts;
 
    @Column(name = "total_amounts")
-   private Float totalAmounts;
+   private Double totalAmounts;
 
    @Column(name = "state")
    private String state;

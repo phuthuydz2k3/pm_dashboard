@@ -102,7 +102,7 @@ public class OrdersView implements Initializable {
                 .filter(order -> mediaId.isEmpty() || order.getOrderId().toString().contains(mediaId))
                 .filter(order -> selectedStatus == null || selectedStatus.equals("All") || order.getState().equalsIgnoreCase(selectedStatus))
                 .filter(order -> {
-                    Float amount = getOrderAmount(order, selectedAmountType);
+                    Double amount = getOrderAmount(order, selectedAmountType);
                     if (amount == null) {
                         return true;
                     }
@@ -128,8 +128,7 @@ public class OrdersView implements Initializable {
         }
     }
 
-
-    private Float getOrderAmount(Order order, String amountType) {
+    private Double getOrderAmount(Order order, String amountType) {
         if (amountType == null) {
             return null;
         }
@@ -142,7 +141,7 @@ public class OrdersView implements Initializable {
             case "Total":
                 return order.getTotalAmounts();
             default:
-                return (float) 0.0;
+                return 0.0;
         }
     }
 

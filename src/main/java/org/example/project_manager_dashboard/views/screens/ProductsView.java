@@ -180,7 +180,7 @@ public class ProductsView implements Initializable {
         List<Node> nodesToRemove = new ArrayList<>();
         for (Node node : mediaTable.getChildren()) {
             if (node instanceof AnchorPane) {
-                ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
+                ProductView productView = (ProductView) node.getUserData();
                 if (productView.isChecked()) {
                     checked++;
                 }
@@ -192,7 +192,7 @@ public class ProductsView implements Initializable {
             if (sum <= 30) {
                 for (Node node : mediaTable.getChildren()) {
                     if (node instanceof AnchorPane) {
-                        ProductView productView = (ProductView) ((AnchorPane) node).getUserData();
+                        ProductView productView = (ProductView) node.getUserData();
                         if (productView.isChecked()) {
                             nodesToRemove.add(node);
                             productsController.deleteProduct(productView.getMediaId());
